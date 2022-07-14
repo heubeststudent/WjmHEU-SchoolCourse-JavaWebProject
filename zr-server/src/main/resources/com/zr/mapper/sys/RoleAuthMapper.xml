@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.mapper.sys.RoleAuthMapper">
+  <resultMap id="BaseResultMap" type="com.zr.vo.sys.RoleAuth">
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="auth_id" jdbcType="BIGINT" property="authId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zr.vo.sys.RoleAuth">
+    insert into sys_roleauth (role_id, auth_id)
+    values (#{roleId,jdbcType=BIGINT}, #{authId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zr.vo.sys.RoleAuth">
+    insert into sys_roleauth
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="authId != null">
+        auth_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="authId != null">
+        #{authId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

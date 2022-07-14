@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.mapper.report.ReportMapper">
+    <select id="selectCarTypeList" resultType="com.zr.vo.report.ReportVo" parameterType="com.zr.vo.report.ReportVo">
+        SELECT r.model AS 'name',COUNT(r.model) AS 'value'
+        FROM
+            (SELECT o.id,c.model FROM lease_order o LEFT JOIN car_car c ON c.id = o.car_id where 1=1
+            <if test="startDate != null and startDate != ''">
+                 and o.pay_time &gt;= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and o.pay_time &lt;= #{endDate}
+            </if>
+            ) r GROUP BY r.model;
+    </select>
+
+    <select id="selectFinanceList" resultType="com.zr.vo.report.ReportVo" parameterType="com.zr.vo.report.ReportVo">
+        SELECT DATE_FORMAT(o.pay_time,"%Y-%m-%d") as 'name',sum(o.total) as 'value'
+            FROM lease_order o
+            where 1=1
+            <if test="startDate != null and startDate != ''">
+                and o.pay_time &gt;= #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and o.pay_time &lt;= #{endDate}
+            </if>
+        GROUP BY DATE_FORMAT(o.pay_time,"%Y-%m-%d");
+    </select>
+</mapper>

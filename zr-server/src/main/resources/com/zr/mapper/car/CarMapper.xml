@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.mapper.car.CarMapper">
+  <resultMap id="BaseResultMap" type="com.zr.vo.car.Car">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="box" jdbcType="DECIMAL" property="box" />
+    <result column="volume" jdbcType="DECIMAL" property="volume" />
+    <result column="door" jdbcType="DECIMAL" property="door" />
+    <result column="seat" jdbcType="DECIMAL" property="seat" />
+    <result column="gears" jdbcType="DECIMAL" property="gears" />
+    <result column="auto" jdbcType="VARCHAR" property="auto" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="agreement_id" jdbcType="INTEGER" property="agreementId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_id" jdbcType="VARCHAR" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_id" jdbcType="VARCHAR" property="modifyId" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, brand, model, box, volume, door, seat, gears, auto, price, agreement_id, 
+    status, create_id, create_time, modify_id, modify_time, img_url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_car
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from car_car
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zr.vo.car.Car">
+    insert into car_car (id, name, brand, 
+      model, box, volume, 
+      door, seat, gears, 
+      auto, price, agreement_id, 
+      status, create_id, create_time, 
+      modify_id, modify_time, img_url
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
+      #{model,jdbcType=VARCHAR}, #{box,jdbcType=DECIMAL}, #{volume,jdbcType=DECIMAL}, 
+      #{door,jdbcType=DECIMAL}, #{seat,jdbcType=DECIMAL}, #{gears,jdbcType=DECIMAL}, 
+      #{auto,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{agreementId,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{createId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyId,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, #{imgUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zr.vo.car.Car">
+    insert into car_car
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="box != null">
+        box,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="door != null">
+        door,
+      </if>
+      <if test="seat != null">
+        seat,
+      </if>
+      <if test="gears != null">
+        gears,
+      </if>
+      <if test="auto != null">
+        auto,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="agreementId != null">
+        agreement_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyId != null">
+        modify_id,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="imgUrl != null">
+        img_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="box != null">
+        #{box,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="door != null">
+        #{door,jdbcType=DECIMAL},
+      </if>
+      <if test="seat != null">
+        #{seat,jdbcType=DECIMAL},
+      </if>
+      <if test="gears != null">
+        #{gears,jdbcType=DECIMAL},
+      </if>
+      <if test="auto != null">
+        #{auto,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="agreementId != null">
+        #{agreementId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null">
+        #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zr.vo.car.Car">
+    update car_car
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="box != null">
+        box = #{box,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="door != null">
+        door = #{door,jdbcType=DECIMAL},
+      </if>
+      <if test="seat != null">
+        seat = #{seat,jdbcType=DECIMAL},
+      </if>
+      <if test="gears != null">
+        gears = #{gears,jdbcType=DECIMAL},
+      </if>
+      <if test="auto != null">
+        auto = #{auto,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="agreementId != null">
+        agreement_id = #{agreementId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null">
+        modify_id = #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgUrl != null">
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zr.vo.car.Car">
+    update car_car
+    set name = #{name,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      box = #{box,jdbcType=DECIMAL},
+      volume = #{volume,jdbcType=DECIMAL},
+      door = #{door,jdbcType=DECIMAL},
+      seat = #{seat,jdbcType=DECIMAL},
+      gears = #{gears,jdbcType=DECIMAL},
+      auto = #{auto,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      agreement_id = #{agreementId,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_id = #{modifyId,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      img_url = #{imgUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <select id="selectId"  resultMap="BaseResultMap">
+    SELECT
+	car_car.*
+FROM
+	car_car
+	LEFT JOIN lease_order ON lease_order.car_id = car_car.id
+WHERE
+	lease_order.id = #{id}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from car_car
+  </select>
+
+  <select id="list" resultMap="BaseResultMap">
+    select * from car_car
+    <where>
+      <if test="name != null">
+        name like '%${name}%'
+      </if>
+    </where>
+  </select>
+</mapper>

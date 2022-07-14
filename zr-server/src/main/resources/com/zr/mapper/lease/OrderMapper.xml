@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.mapper.lease.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.zr.vo.lease.Order">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
+    <result column="car_id" jdbcType="BIGINT" property="carId" />
+    <result column="from_shop_id" jdbcType="BIGINT" property="fromShopId" />
+    <result column="from_time" jdbcType="TIMESTAMP" property="fromTime" />
+    <result column="to_shop_id" jdbcType="BIGINT" property="toShopId" />
+    <result column="to_time" jdbcType="TIMESTAMP" property="toTime" />
+    <result column="agreement_id" jdbcType="VARCHAR" property="agreementId" />
+    <result column="nomp" jdbcType="VARCHAR" property="nomp" />
+    <result column="psur" jdbcType="VARCHAR" property="psur" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="card_id" jdbcType="VARCHAR" property="cardId" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, customer_id, car_id, from_shop_id, from_time, to_shop_id, to_time, agreement_id, 
+    nomp, psur, total, status, type, card_id, pay_time, order_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lease_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zr.vo.lease.Order">
+    insert into lease_order (id, customer_id, car_id, 
+      from_shop_id, from_time, to_shop_id, 
+      to_time, agreement_id, nomp, 
+      psur, total, status, 
+      type, card_id, pay_time, 
+      order_time)
+    values (#{id,jdbcType=BIGINT}, #{customerId,jdbcType=VARCHAR}, #{carId,jdbcType=BIGINT}, 
+      #{fromShopId,jdbcType=BIGINT}, #{fromTime,jdbcType=TIMESTAMP}, #{toShopId,jdbcType=BIGINT}, 
+      #{toTime,jdbcType=TIMESTAMP}, #{agreementId,jdbcType=VARCHAR}, #{nomp,jdbcType=VARCHAR}, 
+      #{psur,jdbcType=VARCHAR}, #{total,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR}, #{payTime,jdbcType=TIMESTAMP}, 
+      #{orderTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zr.vo.lease.Order">
+    insert into lease_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="carId != null">
+        car_id,
+      </if>
+      <if test="fromShopId != null">
+        from_shop_id,
+      </if>
+      <if test="fromTime != null">
+        from_time,
+      </if>
+      <if test="toShopId != null">
+        to_shop_id,
+      </if>
+      <if test="toTime != null">
+        to_time,
+      </if>
+      <if test="agreementId != null">
+        agreement_id,
+      </if>
+      <if test="nomp != null">
+        nomp,
+      </if>
+      <if test="psur != null">
+        psur,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="cardId != null">
+        card_id,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="orderTime != null">
+        order_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="fromShopId != null">
+        #{fromShopId,jdbcType=BIGINT},
+      </if>
+      <if test="fromTime != null">
+        #{fromTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toShopId != null">
+        #{toShopId,jdbcType=BIGINT},
+      </if>
+      <if test="toTime != null">
+        #{toTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agreementId != null">
+        #{agreementId,jdbcType=VARCHAR},
+      </if>
+      <if test="nomp != null">
+        #{nomp,jdbcType=VARCHAR},
+      </if>
+      <if test="psur != null">
+        #{psur,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderTime != null">
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zr.vo.lease.Order">
+    update lease_order
+    <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="carId != null">
+        car_id = #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="fromShopId != null">
+        from_shop_id = #{fromShopId,jdbcType=BIGINT},
+      </if>
+      <if test="fromTime != null">
+        from_time = #{fromTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toShopId != null">
+        to_shop_id = #{toShopId,jdbcType=BIGINT},
+      </if>
+      <if test="toTime != null">
+        to_time = #{toTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agreementId != null">
+        agreement_id = #{agreementId,jdbcType=VARCHAR},
+      </if>
+      <if test="nomp != null">
+        nomp = #{nomp,jdbcType=VARCHAR},
+      </if>
+      <if test="psur != null">
+        psur = #{psur,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        card_id = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderTime != null">
+        order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zr.vo.lease.Order">
+    update lease_order
+    set customer_id = #{customerId,jdbcType=VARCHAR},
+      car_id = #{carId,jdbcType=BIGINT},
+      from_shop_id = #{fromShopId,jdbcType=BIGINT},
+      from_time = #{fromTime,jdbcType=TIMESTAMP},
+      to_shop_id = #{toShopId,jdbcType=BIGINT},
+      to_time = #{toTime,jdbcType=TIMESTAMP},
+      agreement_id = #{agreementId,jdbcType=VARCHAR},
+      nomp = #{nomp,jdbcType=VARCHAR},
+      psur = #{psur,jdbcType=VARCHAR},
+      total = #{total,jdbcType=DECIMAL},
+      status = #{status,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      card_id = #{cardId,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      order_time = #{orderTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <resultMap id="AgreementResultMap" type="com.zr.vo.lease.Order">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
+    <result column="car_id" jdbcType="BIGINT" property="carId" />
+    <result column="from_shop_id" jdbcType="BIGINT" property="fromShopId" />
+    <result column="from_time" jdbcType="TIMESTAMP" property="fromTime" />
+    <result column="to_shop_id" jdbcType="BIGINT" property="toShopId" />
+    <result column="to_time" jdbcType="TIMESTAMP" property="toTime" />
+    <result column="agreement_id" jdbcType="VARCHAR" property="agreementId" />
+    <result column="nomp" jdbcType="VARCHAR" property="nomp" />
+    <result column="psur" jdbcType="VARCHAR" property="psur" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="card_id" jdbcType="VARCHAR" property="cardId" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="customerName" jdbcType="TIMESTAMP" property="customerName" />
+    <result column="CarName" jdbcType="TIMESTAMP" property="carName" />
+    <result column="Agreement" jdbcType="TIMESTAMP" property="agreement" />
+    <association property="car" javaType="com.zr.vo.car.Car" column="id"
+                 select="com.zr.mapper.car.CarMapper.selectId"></association>
+    <association property="cust" javaType="com.zr.vo.lease.Customer" column="id"
+                 select="com.zr.mapper.lease.CustomerMapper.selectById"></association>
+    <association property="pickShop" javaType="com.zr.vo.shop.Shop" column="id"
+                 select="com.zr.mapper.shop.ShopMapper.selectByfrom_shop_id"></association>
+    <association property="returnShop" javaType="com.zr.vo.shop.Shop" column="id"
+                 select="com.zr.mapper.shop.ShopMapper.selectByto_shop_id"></association>
+    <association property="pickCity" javaType="com.zr.vo.shop.City" column="id"
+                 select="com.zr.mapper.shop.CityMapper.selectByfrom_shop_id"></association>
+    <association property="returnCity" javaType="com.zr.vo.shop.City" column="id"
+                 select="com.zr.mapper.shop.CityMapper.selectByto_shop_id"></association>
+    <collection property="carList" ofType="com.zr.vo.car.Car" column="id"
+                select="com.zr.mapper.car.CarMapper.selectId"></collection>
+  </resultMap>
+
+  <select id="list" resultMap="AgreementResultMap">
+    select lease_order.*,lease_agreement.name as Agreement from lease_order
+    LEFT JOIN lease_customer on lease_order.customer_id = lease_customer.customer_id
+    LEFT JOIN car_car on lease_order.car_id = car_car.id
+    LEFT JOIN lease_agreement on lease_order.agreement_id = lease_agreement.id
+    <where>
+      <if test="id != null">
+        lease_order.id like '${id}'
+      </if>
+      <if test="customerId != null">
+       and lease_order.customer_id like '%${customerId}%'
+      </if>
+      <if test="customerName != null">
+        and lease_customer.`name` like '%${customerName}%'
+      </if>
+      <if test="carName != null">
+        and car_car.`id` like '%${carName}%'
+      </if>
+    </where>
+  </select>
+
+  <delete id="delAllByCustomerId">
+     delete  from lease_order where customer_id = #{customerId}
+  </delete>
+
+  <select id="select2" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    a.id, customer_id, car_id, from_shop_id, from_time, to_shop_id, to_time, a.agreement_id,
+    nomp, psur, total, a.status, type, card_id, pay_time, order_time,
+    c.name as toShop, d.name as toCity
+    from lease_order a, shop_shop c, shop_city d
+    where a.id = #{id,jdbcType=BIGINT} and a.to_shop_id = c.id and c.city_id = d.id
+  </select>
+
+  <resultMap id="RsResultMap" type="com.zr.vo.lease.Order">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
+    <result column="car_id" jdbcType="BIGINT" property="carId" />
+    <result column="from_shop_id" jdbcType="BIGINT" property="fromShopId" />
+    <result column="from_time" jdbcType="TIMESTAMP" property="fromTime" />
+    <result column="to_shop_id" jdbcType="BIGINT" property="toShopId" />
+    <result column="to_time" jdbcType="TIMESTAMP" property="toTime" />
+    <result column="agreement_id" jdbcType="VARCHAR" property="agreementId" />
+    <result column="nomp" jdbcType="VARCHAR" property="nomp" />
+    <result column="psur" jdbcType="VARCHAR" property="psur" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="card_id" jdbcType="VARCHAR" property="cardId" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <association property="customer" javaType="com.zr.vo.lease.Customer" column="customer_id" select="com.zr.mapper.lease.CustomerMapper.selectByCustomerId"></association>
+  </resultMap>
+
+  <select id="selectByOrderId" resultMap="RsResultMap">
+        select * from lease_order where id = #{orderId}
+  </select>
+
+
+<!--  <resultMap id="CustomerOrderResultMap" type="com.zr.vo.lease.Order">-->
+<!--    <id column="id" jdbcType="BIGINT" property="id" />-->
+<!--    <result column="customer_id" jdbcType="VARCHAR" property="customerId" />-->
+<!--    <result column="car_id" jdbcType="BIGINT" property="carId" />-->
+<!--    <result column="from_shop_id" jdbcType="BIGINT" property="fromShopId" />-->
+<!--    <result column="from_time" jdbcType="TIMESTAMP" property="fromTime" />-->
+<!--    <result column="to_shop_id" jdbcType="BIGINT" property="toShopId" />-->
+<!--    <result column="to_time" jdbcType="TIMESTAMP" property="toTime" />-->
+<!--    <result column="agreement_id" jdbcType="VARCHAR" property="agreementId" />-->
+<!--    <result column="nomp" jdbcType="VARCHAR" property="nomp" />-->
+<!--    <result column="psur" jdbcType="VARCHAR" property="psur" />-->
+<!--    <result column="total" jdbcType="DECIMAL" property="total" />-->
+<!--    <result column="status" jdbcType="VARCHAR" property="status" />-->
+<!--    <result column="type" jdbcType="VARCHAR" property="type" />-->
+<!--    <result column="card_id" jdbcType="VARCHAR" property="cardId" />-->
+<!--    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />-->
+<!--    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />-->
+<!--    <result column="customerName" jdbcType="TIMESTAMP" property="customerName" />-->
+<!--    <result column="CarName" jdbcType="TIMESTAMP" property="carName" />-->
+<!--    <result column="Agreement" jdbcType="TIMESTAMP" property="agreement" />-->
+<!--    <association property="car" javaType="com.zr.vo.car.Car" column="id"-->
+<!--                 select="com.zr.mapper.car.CarMapper.selectId"></association>-->
+<!--    <association property="cust" javaType="com.zr.vo.lease.Customer" column="id"-->
+<!--                 select="com.zr.mapper.lease.CustomerMapper.selectById"></association>-->
+<!--    <association property="pickShop" javaType="com.zr.vo.shop.Shop" column="id"-->
+<!--                 select="com.zr.mapper.shop.ShopMapper.selectByfrom_shop_id"></association>-->
+<!--    <association property="returnShop" javaType="com.zr.vo.shop.Shop" column="id"-->
+<!--                 select="com.zr.mapper.shop.ShopMapper.selectByto_shop_id"></association>-->
+<!--    <association property="pickCity" javaType="com.zr.vo.shop.City" column="id"-->
+<!--                 select="com.zr.mapper.shop.CityMapper.selectByfrom_shop_id"></association>-->
+<!--    <association property="returnCity" javaType="com.zr.vo.shop.City" column="id"-->
+<!--                 select="com.zr.mapper.shop.CityMapper.selectByto_shop_id"></association>-->
+<!--    <collection property="carList" ofType="com.zr.vo.car.Car" column="id"-->
+<!--                select="com.zr.mapper.car.CarMapper.selectId"></collection>-->
+<!--  </resultMap>-->
+
+  <select id="selectCustomerOrder" resultMap="AgreementResultMap">
+    select lease_order.*,lease_agreement.name as Agreement from lease_order
+    LEFT JOIN lease_customer on lease_order.customer_id = lease_customer.customer_id
+    LEFT JOIN car_car on lease_order.car_id = car_car.id
+    LEFT JOIN lease_agreement on lease_order.agreement_id = lease_agreement.id
+    where lease_order.customer_id=#{customerId}
+  </select>
+</mapper>

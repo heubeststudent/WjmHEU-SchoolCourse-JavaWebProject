@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.mapper.shop.CityMapper">
+  <resultMap id="BaseResultMap" type="com.zr.vo.shop.City">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="province_id" jdbcType="BIGINT" property="provinceId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="create_id" jdbcType="VARCHAR" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_id" jdbcType="VARCHAR" property="modifyId" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, province_id, name, create_id, create_time, modify_id, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shop_city
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from shop_city
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zr.vo.shop.City">
+    insert into shop_city (id, province_id, name, 
+      create_id, create_time, modify_id, 
+      modify_time)
+    values (#{id,jdbcType=BIGINT}, #{provinceId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{createId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyId,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zr.vo.shop.City">
+    insert into shop_city
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="provinceId != null">
+        province_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyId != null">
+        modify_id,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="provinceId != null">
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null">
+        #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zr.vo.shop.City">
+    update shop_city
+    <set>
+      <if test="provinceId != null">
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null">
+        modify_id = #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zr.vo.shop.City">
+    update shop_city
+    set province_id = #{provinceId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_id = #{modifyId,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByfrom_shop_id" resultMap="BaseResultMap">
+SELECT
+	shop_city.`name`
+FROM
+	shop_city,
+	lease_order,
+	shop_shop
+WHERE
+	lease_order.from_shop_id = shop_shop.id
+	AND shop_shop.city_id = shop_city.id
+	AND lease_order.id = #{id}
+  </select>
+  <select id="selectByto_shop_id" resultMap="BaseResultMap">
+    SELECT
+	shop_city.`name`
+FROM
+	shop_city,
+	lease_order,
+	shop_shop
+WHERE
+	lease_order.to_shop_id = shop_shop.id
+	AND shop_shop.city_id = shop_city.id
+	AND lease_order.id = #{id}
+  </select>
+
+
+  <resultMap id="RsResultMap" type="com.zr.vo.shop.City">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="province_id" jdbcType="BIGINT" property="provinceId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="create_id" jdbcType="VARCHAR" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_id" jdbcType="VARCHAR" property="modifyId" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <association property="provinceName" javaType="com.zr.vo.shop.Province">
+      <id property="id" column="province_id"/>
+      <result property="name" column="pname"/>
+    </association>
+  </resultMap>
+  <select id="list" resultMap ="RsResultMap">
+    select c.id,
+    p.name pname,
+    c.name name,
+    c.create_id,
+    c.create_time,
+    c.modify_id,
+    c.modify_time
+    from shop_city c,shop_province p
+    <where>
+      <if test="name != null">
+        c.name like '%${name}%' and
+      </if>
+      c.province_id=p.id
+    </where>
+  </select>
+</mapper>

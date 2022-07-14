@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.mapper.car.WorkMapper">
+  <resultMap id="BaseResultMap" type="com.zr.vo.car.Work">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="car_no" jdbcType="VARCHAR" property="carNo" />
+    <result column="out_time" jdbcType="TIMESTAMP" property="outTime" />
+    <result column="in_time" jdbcType="TIMESTAMP" property="inTime" />
+    <result column="out_user_id" jdbcType="VARCHAR" property="outUserId" />
+    <result column="in_user_id" jdbcType="VARCHAR" property="inUserId" />
+    <result column="out_fit_time" jdbcType="TIMESTAMP" property="outFitTime" />
+    <result column="out_fit_user_id" jdbcType="VARCHAR" property="outFitUserId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_id, car_no, out_time, in_time, out_user_id, in_user_id, out_fit_time, out_fit_user_id, 
+    status, total, mark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_work
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from car_work
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zr.vo.car.Work">
+    insert into car_work (id, order_id, car_no, 
+      out_time, in_time, out_user_id, 
+      in_user_id, out_fit_time, out_fit_user_id, 
+      status, total, mark
+      )
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{carNo,jdbcType=VARCHAR}, 
+      #{outTime,jdbcType=TIMESTAMP}, #{inTime,jdbcType=TIMESTAMP}, #{outUserId,jdbcType=VARCHAR}, 
+      #{inUserId,jdbcType=VARCHAR}, #{outFitTime,jdbcType=TIMESTAMP}, #{outFitUserId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{total,jdbcType=DECIMAL}, #{mark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zr.vo.car.Work">
+    insert into car_work
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="carNo != null">
+        car_no,
+      </if>
+      <if test="outTime != null">
+        out_time,
+      </if>
+      <if test="inTime != null">
+        in_time,
+      </if>
+      <if test="outUserId != null">
+        out_user_id,
+      </if>
+      <if test="inUserId != null">
+        in_user_id,
+      </if>
+      <if test="outFitTime != null">
+        out_fit_time,
+      </if>
+      <if test="outFitUserId != null">
+        out_fit_user_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="carNo != null">
+        #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outTime != null">
+        #{outTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inTime != null">
+        #{inTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outUserId != null">
+        #{outUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="inUserId != null">
+        #{inUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="outFitTime != null">
+        #{outFitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outFitUserId != null">
+        #{outFitUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zr.vo.car.Work">
+    update car_work
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="carNo != null">
+        car_no = #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outTime != null">
+        out_time = #{outTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inTime != null">
+        in_time = #{inTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outUserId != null">
+        out_user_id = #{outUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="inUserId != null">
+        in_user_id = #{inUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="outFitTime != null">
+        out_fit_time = #{outFitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outFitUserId != null">
+        out_fit_user_id = #{outFitUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zr.vo.car.Work">
+    update car_work
+    set order_id = #{orderId,jdbcType=BIGINT},
+      car_no = #{carNo,jdbcType=VARCHAR},
+      out_time = #{outTime,jdbcType=TIMESTAMP},
+      in_time = #{inTime,jdbcType=TIMESTAMP},
+      out_user_id = #{outUserId,jdbcType=VARCHAR},
+      in_user_id = #{inUserId,jdbcType=VARCHAR},
+      out_fit_time = #{outFitTime,jdbcType=TIMESTAMP},
+      out_fit_user_id = #{outFitUserId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      total = #{total,jdbcType=DECIMAL},
+      mark = #{mark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="list" resultMap="BaseResultMap">
+    select b.customer_id as customerId, b.name as name,
+    a.id, order_id, car_no, out_time, in_time, out_user_id, in_user_id, out_fit_time, out_fit_user_id,
+    a.status, c.total, mark
+    from car_work a, lease_customer b, lease_order c
+    <where>
+      <if test="orderId != null">
+        a.order_id = ${orderId}
+      </if>
+      <if test="customerId != null">
+        and b.customer_id like '%${customerId}%'
+      </if>
+      and a.order_id = c.id and c.customer_id = b.customer_id
+    </where>
+    order by order_id
+  </select>
+
+  <update id="update" parameterType="com.zr.vo.car.Work">
+    update car_work
+    set
+      in_time = #{inTime,jdbcType=TIMESTAMP},
+      in_user_id = #{inUserId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      total = #{total,jdbcType=DECIMAL},
+      mark = #{mark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="carOut" parameterType="com.zr.vo.car.Work">
+    update car_work
+    set
+      car_no = #{carNo,jdbcType=VARCHAR},
+      out_time = #{outTime,jdbcType=TIMESTAMP},
+      out_user_id = #{outUserId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="fit" parameterType="com.zr.vo.car.Work">
+    update car_work
+    set
+      out_fit_time = #{outFitTime,jdbcType=TIMESTAMP},
+      out_fit_user_id = #{outFitUserId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <resultMap id="RsResultMap" type="com.zr.vo.car.Work">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="car_no" jdbcType="VARCHAR" property="carNo" />
+    <result column="out_time" jdbcType="TIMESTAMP" property="outTime" />
+    <result column="in_time" jdbcType="TIMESTAMP" property="inTime" />
+    <result column="out_user_id" jdbcType="VARCHAR" property="outUserId" />
+    <result column="in_user_id" jdbcType="VARCHAR" property="inUserId" />
+    <result column="out_fit_time" jdbcType="TIMESTAMP" property="outFitTime" />
+    <result column="out_fit_user_id" jdbcType="VARCHAR" property="outFitUserId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+    <association property="order" column="order_id" javaType="com.zr.vo.lease.Order" select="com.zr.mapper.lease.OrderMapper.selectByOrderId"></association>
+  </resultMap>
+
+  <select id="worklist" resultMap="RsResultMap">
+    SELECT
+    car_work.*
+    FROM
+    car_work
+    LEFT JOIN lease_order ON car_work.order_id = lease_order.id
+    LEFT JOIN lease_customer ON lease_order.customer_id = lease_customer.customer_id
+    <where>
+      <if test="orderId != null">
+        car_work.order_id like '${orderId}'
+      </if>
+      <if test="customer_Id != null">
+        and lease_order.customer_id like '${customerId}'
+      </if>
+    </where>
+  </select>
+
+
+  <resultMap id="WorkResultMap" type="com.zr.vo.car.Work">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="car_no" jdbcType="VARCHAR" property="carNo" />
+    <result column="out_time" jdbcType="TIMESTAMP" property="outTime" />
+    <result column="in_time" jdbcType="TIMESTAMP" property="inTime" />
+    <result column="out_user_id" jdbcType="VARCHAR" property="outUserId" />
+    <result column="in_user_id" jdbcType="VARCHAR" property="inUserId" />
+    <result column="out_fit_time" jdbcType="TIMESTAMP" property="outFitTime" />
+    <result column="out_fit_user_id" jdbcType="VARCHAR" property="outFitUserId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+    <result column="customerId" jdbcType="TIMESTAMP" property="customer_Id" />
+    <result column="car" jdbcType="TIMESTAMP" property="car" />
+    <result column="customerName" jdbcType="TIMESTAMP" property="customerName" />
+    <association property="pickShop" javaType="com.zr.vo.shop.Shop" column="order_id"
+                 select="com.zr.mapper.shop.ShopMapper.selectByfrom_shop_id"></association>
+    <association property="returnShop" javaType="com.zr.vo.shop.Shop" column="order_id"
+                 select="com.zr.mapper.shop.ShopMapper.selectByto_shop_id"></association>
+  </resultMap>
+
+
+  <select id="selectwork" resultMap="WorkResultMap">
+    SELECT
+    car_work.*,
+    lease_customer.name AS customerName,
+    car_car.name AS car ,
+    lease_customer.customer_id as customerId
+    FROM
+	    car_work
+    LEFT JOIN lease_order ON car_work.order_id = lease_order.id
+    LEFT JOIN car_car ON lease_order.car_id = car_car.id
+    LEFT JOIN lease_customer ON lease_order.customer_id = lease_customer.customer_id
+    <where>
+      <if test="orderId != null">
+        car_work.order_id like '${orderId}'
+      </if>
+    </where>
+  </select>
+
+
+</mapper>

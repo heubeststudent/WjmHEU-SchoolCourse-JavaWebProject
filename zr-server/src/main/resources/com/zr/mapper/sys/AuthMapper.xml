@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.mapper.sys.AuthMapper">
+  <resultMap id="BaseResultMap" type="com.zr.vo.sys.Auth">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="seq" jdbcType="DECIMAL" property="seq" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="create_id" jdbcType="VARCHAR" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_id" jdbcType="VARCHAR" property="modifyId" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, url, seq, mark, pid, create_id, create_time, modify_id, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_auth
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_auth
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zr.vo.sys.Auth">
+    insert into sys_auth (id, name, url, 
+      seq, mark, pid, create_id, 
+      create_time, modify_id, modify_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{seq,jdbcType=DECIMAL}, #{mark,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{createId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyId,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zr.vo.sys.Auth">
+    insert into sys_auth
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="seq != null">
+        seq,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyId != null">
+        modify_id,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null">
+        #{seq,jdbcType=DECIMAL},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null">
+        #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zr.vo.sys.Auth">
+    update sys_auth
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null">
+        seq = #{seq,jdbcType=DECIMAL},
+      </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null">
+        modify_id = #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zr.vo.sys.Auth">
+    update sys_auth
+    set name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=DECIMAL},
+      mark = #{mark,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=BIGINT},
+      create_id = #{createId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_id = #{modifyId,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectParents" resultMap="BaseResultMap">
+    select sys_auth.name , pid, id
+    from sys_auth
+    where pid = 0
+  </select>
+  <select id="selectChildren" resultMap="BaseResultMap">
+    select sys_auth.name , pid, id
+    from sys_auth
+    where pid > 0
+  </select>
+
+
+  <update id="update" parameterType="com.zr.vo.sys.Auth">
+    update sys_auth
+    set name = #{name,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=DECIMAL},
+      mark = #{mark,jdbcType=VARCHAR},
+      modify_id = #{modifyId,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.mapper.sys.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.zr.vo.sys.Role">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+    <result column="create_id" jdbcType="VARCHAR" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_id" jdbcType="VARCHAR" property="modifyId" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <collection property="auths" ofType="java.lang.String" column="user_id" select="com.zr.mapper.sys.RoleMapper.listByUserId"></collection>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, name, mark, create_id, create_time, modify_id, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zr.vo.sys.Role">
+    insert into sys_role (id, name, mark, 
+      create_id, create_time, modify_id, 
+      modify_time)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, 
+      #{createId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyId,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zr.vo.sys.Role">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyId != null">
+        modify_id,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null">
+        #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zr.vo.sys.Role">
+    update sys_role
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null">
+        modify_id = #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zr.vo.sys.Role">
+    update sys_role
+    set name = #{name,jdbcType=VARCHAR},
+      mark = #{mark,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_id = #{modifyId,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectList" resultMap="BaseResultMap">
+    select * from sys_role
+    <where>
+      <if test="name != null">
+        name like '%${name}%'
+      </if>
+    </where>
+  </select>
+
+  <select id="selectAuth" resultType="string">
+    select
+	sys_auth.name
+	from sys_auth, sys_role, sys_roleauth
+	WHERE sys_role.id = sys_roleauth.role_id and sys_roleauth.auth_id = sys_auth.id and sys_role.id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectLastestRoleId" resultType="long">
+    select id from sys_role where create_time =  (select max(create_time) from sys_role)
+  </select>
+
+  <select id="listByUserId" resultMap="BaseResultMap">
+    SELECT
+	sys_role.*
+    FROM
+	sys_role
+    LEFT JOIN sys_userrole ON sys_role.id = sys_userrole.role_id
+    WHERE
+	sys_userrole.user_id = #{userId}
+  </select>
+
+  <insert id="createRelation">
+    insert into sys_roleauth values(#{roleId}, #{id})
+  </insert>
+
+  <delete id="deleteAuthById">
+    delete from sys_roleauth where role_id = #{roleId}
+  </delete>
+
+  <select id="selectRoles" resultType="com.zr.vo.sys.Role">
+    select name from sys_role
+  </select>
+
+</mapper>

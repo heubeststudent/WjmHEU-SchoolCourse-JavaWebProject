@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.mapper.sys.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.zr.vo.sys.UserRole">
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zr.vo.sys.UserRole">
+    insert into sys_userrole (user_id, role_id)
+    values (#{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zr.vo.sys.UserRole">
+    insert into sys_userrole
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

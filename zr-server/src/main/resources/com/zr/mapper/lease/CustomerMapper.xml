@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.mapper.lease.CustomerMapper">
+  <resultMap id="BaseResultMap" type="com.zr.vo.lease.Customer">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="contact" jdbcType="VARCHAR" property="contact" />
+    <result column="ctel" jdbcType="VARCHAR" property="ctel" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_id" jdbcType="VARCHAR" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_id" jdbcType="VARCHAR" property="modifyId" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, customer_id, password, code, name, idcard, contact, ctel, status, create_id, 
+    create_time, modify_id, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lease_customer
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_customer
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zr.vo.lease.Customer">
+    insert into lease_customer (id, customer_id, password, 
+      code, name, idcard, 
+      contact, ctel, status, 
+      create_id, create_time, modify_id, 
+      modify_time)
+    values (#{id,jdbcType=BIGINT}, #{customerId,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, #{ctel,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{createId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyId,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zr.vo.lease.Customer">
+    insert into lease_customer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="contact != null">
+        contact,
+      </if>
+      <if test="ctel != null">
+        ctel,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyId != null">
+        modify_id,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="ctel != null">
+        #{ctel,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null">
+        #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zr.vo.lease.Customer">
+    update lease_customer
+    <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="ctel != null">
+        ctel = #{ctel,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null">
+        modify_id = #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zr.vo.lease.Customer">
+    update lease_customer
+    set customer_id = #{customerId,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      ctel = #{ctel,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_id = #{modifyId,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectById" resultMap="BaseResultMap">
+SELECT
+	lease_customer.*
+FROM
+	lease_customer
+	LEFT JOIN lease_order ON lease_order.customer_id = lease_customer.customer_id
+WHERE
+	lease_order.id = #{id}
+  </select>
+  <select id="list" resultMap="BaseResultMap">
+    select *
+    from lease_customer
+    <where>
+      <if test="name != null">
+        name like '%${name}%'
+      </if>
+    </where>
+  </select>
+
+  <update id="updateBycustomerId" parameterType="com.zr.vo.lease.Customer">
+    update lease_customer
+    set
+      password = #{password,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      ctel = #{ctel,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_id = #{modifyId,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+      where
+      customer_id = #{customerId,jdbcType=VARCHAR}
+  </update>
+
+  <delete id="delAllByCustomerId">
+    delete  from lease_customer where customer_id = #{customerId,jdbcType=VARCHAR}
+  </delete>
+
+
+  <select id="selectByCustomerId" resultMap="BaseResultMap">
+     select name from lease_customer where customer_id = #{customerId}
+  </select>
+
+  <select id="customerLogin" resultMap="BaseResultMap">
+    select * from  lease_customer where customer_id = #{customerId} and password = #{password}
+  </select>
+</mapper>
