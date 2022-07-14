@@ -35,7 +35,7 @@
 1.在前端Vue脚手架项目文件下，运行此命令
 
 ```bash
-  npm run test
+  npm run dev
 ```
 
 2.启用Redis.exe
