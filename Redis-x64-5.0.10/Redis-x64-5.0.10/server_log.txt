@@ -1,0 +1,7 @@
+[1052] 21 Feb 10:07:45.454 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+[1052] 21 Feb 10:07:45.455 # Redis version=5.0.10, bits=64, commit=1c047b68, modified=0, pid=1052, just started
+[1052] 21 Feb 10:07:45.456 # Configuration loaded
+[1052] 21 Feb 10:07:45.459 * Running mode=standalone, port=6379.
+[1052] 21 Feb 10:07:45.459 # Server initialized
+[1052] 21 Feb 10:07:45.461 * DB loaded from disk: 0.001 seconds
+[1052] 21 Feb 10:07:45.461 * Ready to accept connections
